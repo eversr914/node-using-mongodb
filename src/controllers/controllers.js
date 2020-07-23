@@ -15,7 +15,7 @@ export const addnewProduct = (req, res) => {
 }
 
 export const getProducts = (req, res) => {
-    Product.find({}, (err, Product) =>{
+    Product.find({}, (err, Product) => {
         if (err) {
             res.send(err);
         }
@@ -24,7 +24,16 @@ export const getProducts = (req, res) => {
 }
 
 export const getProductWithID = (req, res) => {
-    Product.findByID(req.params.ProductID, (err, Product) => {
+    Product.findById(req.params.ProductID, (err, Product) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(Product);
+    });
+}
+
+export const updateProduct = (req, res) => {
+    Product.findOneAndUpdate({ _id: req.params.ProductID}, req.body, { new: true, useFindAndModify: false }, (err, Product) => {
         if (err) {
             res.send(err);
         }
@@ -37,6 +46,6 @@ export const deleteProduct = (req, res) => {
         if (err) {
             res.send(err);
         }
-        res.json({ message: 'Successfully deleted Product'});
-    })
+        res.json({ message: 'successfuly deleted Product'});
+    });
 }

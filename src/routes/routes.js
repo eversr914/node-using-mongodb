@@ -7,18 +7,20 @@ import { addnewProduct,
 
 const routes = (app) => {
     app.route('/products')
+        .get(getProducts)
 
-      .get(getProducts)
+        // Post endpoint
+        .post(addnewProduct);
 
-      .post(addnewProduct);
+    app.route('/products/:ProductID')
+        // get a specific Product
+        .get(getProductWithID)
 
-    app.route('./products/:ProductID')
+        // updating a specific Product
+        .put(updateProduct)
 
-      .get(getProductWithID)
-
-      .get(updateProduct)
-
-      .delete(deleteProduct);
+        // deleting a specific Product
+        .delete(deleteProduct);
 }
 
 export default routes;
